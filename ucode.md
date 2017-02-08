@@ -16,6 +16,7 @@ jsjson(s); //inner JSON.stringfy  //javascript escape
 ## more exsample
 ```js
  var ob=get('ob');//<textarea id="ob"></textarea>
+ var uo ={p:'ucode'};
  var d0={a:"aaaaaa",b:[0,1,2,3,4,5],c:{pan:"panpan",mon:"monmon",url:'http://exsample.com'}},_d0;
   ob.value=ucode(d0,1,uo);
  _d0=ucode(ob.value,-1,uo);

@@ -24,3 +24,9 @@ jsjson(s); //inner JSON.stringfy  //javascript escape
  console.log(jsjson(d0)===jsjson(_d0));
 });
 ```
+## note
+about opt {u:...} : default u is ```location.href``` href is param(=```location.search```) string insted. 
+if no param url want, this:
+```js
+ var uo ={u:location.origin+location.pathname,p:'ucode'}
+````

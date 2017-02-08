@@ -2,7 +2,8 @@
 https://urlcode.github.io/ucode.test.html
 
 http://codepen.io/kunigamaeno/pen/QdVvWe
-## Usage ucode(data,flg,opt);
+## Usage:
+__ucode(data,flg,opt);__
 ```js
 ucode(data,1,{u:'http://exsample.com/',p:'ucode'}); //encode js => {u}?&{p}={data}
 ucode(_data,-1,{u:'http://exsample.com/',p:'ucode'}); //decode url=> js data

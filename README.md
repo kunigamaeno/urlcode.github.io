@@ -9,7 +9,8 @@
  
 ## ucode io fix
 
-ucode(data,flg,{u:baseurl,p:paramname}); //flg=1 > encode  flg=-1> decode
+ucode(data,flg,{u:baseurl,p:paramname}); //flg=1 > encode  //flg=-1> decode
+
 ------
 # history:v0.0.1
 ## this site mean.

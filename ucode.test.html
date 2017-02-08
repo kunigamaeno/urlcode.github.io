@@ -1,0 +1,68 @@
+<script>
+
+!function(a){function b(a,b,c,d=1){return"hsla("+a%360+","+b%100+"%,"+c%100+"%,"+d+");"}function c(a,b){return Math.floor(Math.random()*(b-a+1))+a}function d(a,b,d,e){return c(d-e+a,d+e)%b}var e=20,f=1,g=function(a=1){var g="hsla(0,77%,73%,1)";return g=a%2==0?b(d(0,360,f*(360/e),20),c(65,70),c(65,70),1):b(d(0,360,f*(360/e),20),c(70,80),c(70,80),1),f++,g};a.humcolor=g}(this);
+
+
+
+window.addEventListener('DOMContentLoaded',()=>{
+ ['//urlcode.github.io/ucode.js','//urlcode.github.io/usefuldom.js','//urlcode.github.io/useful.js']
+  .forEach((d)=>{ 
+  var el=document.createElement('script');el.src=d;
+  document.body.appendChild(el);
+ })
+ 
+})
+
+window.addEventListener('load',()=>{
+ var body=document.body,test=get('test'),
+     loadcolor=function(){
+      body.setAttribute('style','background-color:'+humcolor());
+     };
+  var a=['https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'];
+ wait(300).then(()=>{
+  a.map((d)=>{
+  var el=document.createElement('script');
+   on(el,'load',()=>{ loadcolor() });
+      el.src=d;body.appendChild(el);
+  });
+ });
+
+  test.innerHTML+=Object.keys(location).map((d)=>{ return d+':'+''+location[d] });
+ 
+ var d=get('d'),res=get('res'),same=get('same'),bd=get('bd');
+ var uo ={p:'ucode'}
+ on(d,'keydown',function(event){ 
+  if( event.key ==='Enter' ){
+   
+   var data=d.value,_data=ucode(data,1,uo);//console.log(data,_data)
+   res.value= _data; 
+   var backdata=ucode(_data,-1,uo);
+   same.innerText= (data===backdata)?true:false;
+   same.innerText+= sprintf('(urlsize=%s)(%s,%s)', _data.length ,data.length,backdata.length)
+   bd.value=backdata;
+  }
+ })
+ 
+ var ob=get('ob');//<textarea id="ob"></textarea>
+ var d0={a:"aaaaaa",b:[0,1,2,3,4,5],c:{pan:"panpan",mon:"monmon",url:'http://exsample.com'}},_d0;
+  ob.value=ucode(d0,1,uo);
+ _d0=ucode(ob.value,-1,uo);
+ console.log(d0,_d0)
+ console.log(jsjson(d0)===jsjson(_d0));
+});
+</script>
+<style>
+#ob,#test,#d,#bd,#res{
+ min-width:100%;
+ min-height:5vw;
+}
+</style>
+<body>
+ <div id="test"></div>
+ <textarea id="d"></textarea>
+ <textarea id="res"></textarea>
+ <div id="same"></div>
+ <textarea id="bd"></textarea> 
+ <hr>
+ <textarea id="ob"></textarea>
+</body>

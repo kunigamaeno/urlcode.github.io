@@ -1,5 +1,6 @@
 ## demo
-//urlcode.github.io/urlcode.test.html
+https://urlcode.github.io/urlcode.test.html
+
 http://codepen.io/kunigamaeno/pen/QdVvWe
 ## Usage ucode(data,flg,opt);
 ```js

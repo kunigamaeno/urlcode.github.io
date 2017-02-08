@@ -24,7 +24,7 @@ jsjson(s); //inner JSON.stringfy  //javascript escape
 });
 ```
  */
- var def={u:location.origin||'',p:'ucode'};
+ var def={u:location.href||'',p:'ucode'};
  function jsjson(s) {
     return JSON.stringify(s).
         replace(/\u2028/g, '\\u2028').

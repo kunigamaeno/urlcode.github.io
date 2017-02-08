@@ -1,6 +1,8 @@
 # urlcode.github.io
-## this site mean
-urlcode site
+-------
+# this site mean.
+url param and short url => no storaged data save.
+
 ## twitter use
 i usefull-and-usefull twitter short url, i think.
 so,exsam...
@@ -20,6 +22,5 @@ ex) old-ie is max url length 4096.
 ## world-seem look around short url.
 so,exsam... ucode too long, but Not short url change is short.
 
-## twitter!
-
-
+# Ya! twitter!
+if twitter tweet-short url, url save the Data.  

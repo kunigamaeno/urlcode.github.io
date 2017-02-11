@@ -1,0 +1,61 @@
+
+<body>
+ <script src="//urlcode.github.io/useful.js"></script>
+ <script src="//urlcode.github.io/usefuldom.js"></script> 
+ <script type="text/javascript" id="jsonp">
+function foo(response) {
+  var meta = response.meta;
+  var data = response.data;
+  var cep="\n";
+  var show=function(obj){return Object.keys(obj).map((d)=>{ return d+': '+obj[d] }).join(cep)}
+  get('result').textContent =show(meta)+cep+show(data);
+}
+</script>
+<script type="text/javascript">
+function foo2(response) {
+  var meta = response.meta;
+  var data = response.data;
+  console.log("foo2",meta);
+  console.log("foo2",data);
+} 
+</script>
+<script>
+
+
+
+window.addEventListener('load',()=>{
+ //
+var j=get('jsonp');
+var script = document.createElement('script');
+ on(script,'load',()=>{
+  console.log('in'); 
+ });
+ j.appendChild(script);
+ var url='',cb='callback=foo';
+  url='https://api.github.comllll';
+  url='https://api.github.com/user';
+ var oauth="00e5aac76b7ca8be21adf8002d81e6e18f6db3f5";
+  url='https://api.github.com/?access_token='+oauth;
+  url='https://api.github.com/v3/repos/contents';
+ //
+ var at=(url.indexOf('?')==-1)?'?':'&';
+ //console.log(url+ at + cb)
+ script.src = url+ at + cb;
+ //
+ 
+ var c_id='9b648ffa569035ebdfe7';
+ var authurl='https://github.com/login/oauth/authorize?client_id='+c_id+'&scope=repo';
+ //
+ //https://github.com/login/oauth/authorize?client_id=$CLIENT_ID&scope=repo
+ //9b648ffa569035ebdfe7
+//https://urlcode.github.io/authdemo.html?callback=foo 
+ //
+ 
+}); 
+</script>
+ 
+ <style>#result{position:fixed; top:0;right:0;padding:1em;background-color:rgba(0,0,0,0.75);color:white;max-height:300px;overflow-y:scroll}</style>
+ <pre id="result"></pre>
+ <a href="https://github.com/login/oauth/authorize?client_id=9b648ffa569035ebdfe7&scope=repo" >auth</a>
+<!-- <script src="https://gist.github.com/craveytrain/735512.js"></script>-->
+</body>

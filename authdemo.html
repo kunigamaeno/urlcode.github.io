@@ -8,7 +8,9 @@ function foo(response) {
   var data = response.data;
   var cep="\n";
   var show=function(obj){return Object.keys(obj).map((d)=>{ return d+': '+obj[d] }).join(cep)}
-  get('result').textContent =show(meta)+cep+show(data);
+  get('result').textContent +=''+show(meta)+cep+show(data);
+  console.log("foo",meta);
+  console.log("foo",data);
 }
 </script>
 <script type="text/javascript">
@@ -31,7 +33,7 @@ var script = document.createElement('script');
   console.log('in'); 
  });
  j.appendChild(script);
- var url='',cb='callback=foo';
+ var url='',cb='callback=foo2';
   url='https://api.github.comllll';
   url='https://api.github.com/user';
  var oauth="00e5aac76b7ca8be21adf8002d81e6e18f6db3f5";

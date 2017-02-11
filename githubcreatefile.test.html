@@ -1,0 +1,185 @@
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<title>Online GitHub Repository Creator from Local Folders</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+#container {
+	width:80%;
+	margin:0px auto;
+}
+#container input {
+	width:100%;
+	padding:10px;
+	margin-bottom:15px;
+	display:block;
+}
+#container #submit {
+	width:150px;
+}
+</style>
+</head>
+<body>
+
+<div id="container">
+
+<div id="info">
+    <h1>Create GitHub Repo with JavaScript</h1>
+    <p>Want to quickly convert a folder on your hard drive into a GitHub Repository? This HTML5 form will authenticate, create a repo, and upload a folder to the repository with JavaScript and the Github API. Check out the source to see how it works.  <a href="http://techslides.com/create-repositories-with-github-api-and-html5">Back to Article</a></p>
+</div>
+
+
+  <div id="side">
+  <form id="githubForm" onsubmit="return false;">
+    <input type="file" name="folder" id="folder" webkitdirectory="" directory="" required="">
+    <input type="text" name="username" id="username" placeholder="GitHub Username" required="">
+    <input type="text" name="password" id="password" placeholder="GitHub Password" required="">
+    <input type="text" name="name" id="name" placeholder="Repo Name" required="">
+    <input type="text" name="description" id="description" placeholder="Repo Description" required="">
+    <input type="submit" id="submit" value="Submit to GitHub">
+  </form>
+  </div>
+  <div id="results"></div>
+</div>
+
+<!--<script type="text/javascript" src="http://techslides.com/demos/image-browser/jquery-2.1.1.min.js"></script>-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+var folderfiles = [];
+var auth, authid, token, repourl, curl;
+
+var folder = document.getElementById("folder");
+
+//process files
+folder.addEventListener("change", function (e) {
+	var files = e.target.files;
+    for(i=0; i<files.length; i++) {
+    	var file = files[i];
+        folderfiles.push(file);
+    }
+}, false);
+
+
+$('#submit').click(function(){
+    if($("form")[0].checkValidity()) {
+
+	    var username = $("#username").val();
+	    var password = $("#password").val();
+	    var name = $("#name").val();
+	    var description = $("#description").val();
+
+	    auth = btoa(username+':'+password);
+
+	    $("#results").text("Authenticating...");
+
+		$.ajax({ 
+		    url: 'https://api.github.com/authorizations',
+		    type: 'POST',
+		    beforeSend: function(xhr) { 
+		        xhr.setRequestHeader("Authorization", "Basic " + auth); 
+		    },
+		    data: '{"scopes":["repo"],"note":"Create Repo with Ajax"}'
+		}).done(function(response) {
+			authid = response.id;
+			token = response.token;
+		    $("#results").text("Authenticated.");
+		    postrepo(name,description);
+		}).error(function(err) {
+		    $("#results").text("Authorization Failed. Check console log.");
+		    console.log(err);
+		});
+
+    } else {
+	    $("#results").text("Please fill out the form.");
+	}
+});
+
+function postrepo(name,description){
+
+	$("#results").text("Creating GitHub Repository.");
+
+	var postdata = '{"name":"'+name+'","description":"'+description+'","auto_init":true}';
+
+	$.ajax({ 
+		url: 'https://api.github.com/user/repos',
+		type: 'POST',
+		beforeSend: function(xhr) { 
+			xhr.setRequestHeader("Authorization", "token " + token); 
+		},
+		data: postdata
+	}).done(function(response) {
+		curl = response.contents_url;
+		repourl = response.html_url;
+		$("#results").text("Created Repository.");
+		postfiles(curl);
+	}).error(function(err) {
+		$("#results").text("Repo Creation Failed. Check console log.");
+		console.log(err);
+	});
+
+}
+
+function postfiles(){
+
+  $("#results").text("Uploading Files to GitHub Repository. "+folderfiles.length+" files left to upload.");
+
+  if(folderfiles.length>0){
+
+	var f = folderfiles.pop();
+
+	var filename = f.webkitRelativePath;
+	var filemessage = "uploading a file";
+
+	var reader = new FileReader();
+
+	reader.onload = function(e) {
+
+		var filecontent = reader.result;
+		//var basecontent = btoa(filecontent);
+		var basecontent = btoa(unescape(encodeURIComponent(filecontent)));
+		var apiurl = curl.replace('{+path}',filename);
+		var filedata = '{"message":"'+filemessage+'","content":"'+basecontent+'"}';
+
+			$.ajax({ 
+			    url: apiurl,
+			    type: 'PUT',
+			    beforeSend: function(xhr) { 
+			        xhr.setRequestHeader("Authorization", "token " + token);
+			    },
+			    data: filedata
+			}).done(function(response) {
+				$("#results").text("Uploading...");
+				postfiles();
+			}).error(function(err) {
+				$("#results").text("File Upload Failed.");
+				console.log(err);
+				postfiles();
+			});
+
+	}
+
+	reader.readAsText(f,"UTF-8");
+
+  } else {
+	delauth();
+  }
+
+}
+
+function delauth(){
+	$.ajax({ 
+		url: 'https://api.github.com/authorizations/'+authid,
+		type: 'DELETE',
+		beforeSend: function(xhr) { 
+			xhr.setRequestHeader("Authorization", "Basic " + auth); 
+		}
+	});
+
+	var htmlcode = 'Finished. Check it out: <a href="'+repourl+'">'+repourl+'</a>';
+	$("#results").html(htmlcode);
+}
+
+</script>
+
+
+</body></html>

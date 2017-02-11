@@ -97,7 +97,7 @@ var script = document.createElement('script');
        '&code='+code+'&client_id='+client_id+'&client_secret='+client_secret;
    var el = document.createElement('script');
    //
-   on(el,'load',function(){  console.log('load',authurl) }
+   on(el,'load',function(){  console.log('load',authurl) });
    document.body.appendChild(el);
    //el.type="application/x-www-form-urlencoded";
    el.src=authurl;

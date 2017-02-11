@@ -1,5 +1,42 @@
 
 <body>
+ <script type="text/javascript">
+function tokenp(res){
+  var meta = res.meta;
+  var data = res.data;
+  console.log("tokenp",meta);
+  console.log("tokenp",data);
+ //access_token=<アクセストークン>&scope=&token_type=bearer
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+ var authredirect=function authredirect(){
+   var code=location.search.split(/\?|\&/)
+    .filter((d)=>{return ( d.split('=')[0]==='code') ? true : false });
+    
+   console.log(location,code);
+   //https://urlcode.github.io/authdemo.html?callback=foo&code=6c3e5c0a087b02244e8f
+   return (code.length==0)?null:code[0].split('=')[1];
+  };
+ var getaccesstoken=function getaccesstoken(code){
+   console.log('redirect',code);
+   var client_secret ='ca03b9287ab83de30abeca3670b481da51e031fa',client_id='9b648ffa569035ebdfe7';
+   var authurl='https://github.com/login/oauth/access_token'+'?callback=tokenp'+
+       '&code='+code+'&client_id='+client_id+'&client_secret='+client_secret;
+   var el = document.createElement('script');
+   //
+   el.load=function(){  console.log('load',authurl) }
+   document.body.appendChild(el);
+   el.src=authurl;
+ };
+  var c=authredirect();
+  if(c) getaccesstoken(c);
+  else console.log('normal')
+ 
+});
+//code
+//client_id,
+ </script> 
  <script src="//urlcode.github.io/useful.js"></script>
  <script src="//urlcode.github.io/usefuldom.js"></script> 
  <script type="text/javascript" id="jsonp">
@@ -53,11 +90,21 @@ var script = document.createElement('script');
 //https://urlcode.github.io/authdemo.html?callback=foo 
  //
  
+ var auth=get("authbtn");
+ on(auth,'click',()=>{
+  console.log("authbtn hit")
+  var script = document.createElement('script');
+  on(script,'load',()=>{
+    console.log('load',location); 
+  });  
+   script.src = "https://github.com/login/oauth/authorize?client_id=9b648ffa569035ebdfe7&scope=repo";
+ });
+ 
 }); 
 </script>
  
  <style>#result{position:fixed; top:0;right:0;padding:1em;background-color:rgba(0,0,0,0.75);color:white;max-height:300px;overflow-y:scroll}</style>
  <pre id="result"></pre>
- <a href="https://github.com/login/oauth/authorize?client_id=9b648ffa569035ebdfe7&scope=repo" >auth</a>
+ <button id="authbtn">auth</button>
 <!-- <script src="https://gist.github.com/craveytrain/735512.js"></script>-->
 </body>

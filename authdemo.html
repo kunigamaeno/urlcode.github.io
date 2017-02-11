@@ -1,9 +1,9 @@
 
 <body>
  <script type="text/javascript">
-function tokenp(res){
-  var meta = res.meta;
-  var data = res.data;
+function tokenp(response){
+  var meta = response.meta;
+  var data = response.data;
   console.log("tokenp",meta);
   console.log("tokenp",data);
  //access_token=<アクセストークン>&scope=&token_type=bearer
@@ -27,6 +27,7 @@ window.addEventListener('DOMContentLoaded',()=>{
    //
    el.load=function(){  console.log('load',authurl) }
    document.body.appendChild(el);
+   el.type="application/x-www-form-urlencoded";
    el.src=authurl;
  };
   var c=authredirect();
@@ -46,16 +47,16 @@ function foo(response) {
   var cep="\n";
   var show=function(obj){return Object.keys(obj).map((d)=>{ return d+': '+obj[d] }).join(cep)}
   get('result').textContent +=''+show(meta)+cep+show(data);
-  console.log("foo",meta);
-  console.log("foo",data);
+  //console.log("foo",meta);
+  //console.log("foo",data);
 }
 </script>
 <script type="text/javascript">
 function foo2(response) {
   var meta = response.meta;
   var data = response.data;
-  console.log("foo2",meta);
-  console.log("foo2",data);
+  //console.log("foo2",meta);
+  //console.log("foo2",data);
 } 
 </script>
 <script>
@@ -67,7 +68,7 @@ window.addEventListener('load',()=>{
 var j=get('jsonp');
 var script = document.createElement('script');
  on(script,'load',()=>{
-  console.log('in'); 
+  //console.log('in'); 
  });
  j.appendChild(script);
  var url='',cb='callback=foo2';
@@ -92,10 +93,10 @@ var script = document.createElement('script');
  
  var auth=get("authbtn");
  on(auth,'click',()=>{
-  console.log("authbtn hit")
+  //console.log("authbtn hit")
   var script = document.createElement('script');
   on(script,'load',()=>{
-    console.log('load',location); 
+    //console.log('load',location); 
   });  
    script.src = "https://github.com/login/oauth/authorize?client_id=9b648ffa569035ebdfe7&scope=repo";
  });

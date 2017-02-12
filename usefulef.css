@@ -1,0 +1,63 @@
+
+/**/
+.ef-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.ef-ripple:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+.ef-ripple:active:after {
+  transform: scale(0, 0);
+  opacity: .2;
+  transition: 0s;
+}
+//other
+//http://qiita.com/nekoneko-wanwan/items/c9f26ce049bd422e555c
+//http://nekoneko-wanwan.github.io/demo/mouse-action/click/
+
+/**/
+
+.ef-bar{
+ 
+}
+.ef-beat{
+ 
+}
+
+/**/
+.ef-wink{
+    opacity: 1;
+    -webkit-animation: blink 1s infinite;
+    -moz-animation: blink 1s infinite;
+    animation: blink 1s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+/**/

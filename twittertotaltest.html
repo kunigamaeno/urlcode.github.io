@@ -1,0 +1,61 @@
+<head>
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script charset="utf-8">
+
+/*
+var t=document.createElement('iframe');
+t.src="https://twitter.com/intent/tweet?text="
+*/
+var te=document.getElementById('te')
+ ,tbtn=document.getElementById('tbtn');
+
+tbtn.onclick=function(evt){
+ var makeurl=function(){
+     var baseurl=window.location.origin//window.location.href
+      ,da='&urlcode=aiuewokakikukekosasisuaakikukekosasisusaiuewokakikukekosasisusaiuewokakikukekosasisusaiuewokakikukekosasisusaiuewokakikukekosasisusaiuewokakikukekosasisusaiuewokakikukekosasisuss'
+      ,cep=(baseurl.indexOf("?")===-1)? "?":"";
+     return encodeURIComponent( baseurl+cep+da);
+    };
+ var maketext=function(){
+    //var text=te.value;
+    var lenmax=100;
+    var text=te.value.slice(0,lenmax);
+    //textmax is maybe 100 less; //text-(tag+url)
+    return encodeURIComponent(text);
+ };
+ var makehashtags=function(){
+    return encodeURIComponent("urlcode,saves");
+ };
+ //console.log(evt,evt.screenX+32,evt.screenY)
+ var pleft =evt.screenX+evt.offsetX+5,ptop=evt.screenY/2;
+ var wmode="urlcode on twitter"
+  ,wopt ="scrollbars=no,resizable=no,toolbar=no,location=no,width=550,height=300"
+    + ",left="+pleft+",top="+ptop
+  ,tweet_url="https://twitter.com/intent/tweet" //"http://twitter.com/share"
+    + "?text=" + maketext() +" " +makeurl()
+    + "&hashtags=" +makehashtags() 
+    //+ "&url=" + makeurl()
+ ;
+ window.open(tweet_url,wmode,wopt);
+}
+</script>
+</head>
+<body>
+<span class="btnsize">
+<i id="tbtn" class="fa fa-twitter-square" aria-hidden="true"></i>
+ <i class="fa fa-code" aria-hidden="true"></i>
+ <i class="fa fa-code-fork" aria-hidden="true"></i>
+</span>
+<div></div>
+<div><textarea id="te" rows="5" cols="100"></textarea></div>
+<div>            
+
+<blockquote class="twitter-tweet" width="160px" data-lang="ja"><p lang="en" dir="ltr">square test  <a href="https://twitter.com/hashtag/urlcode?src=hash">#urlcode</a> <a href="https://t.co/XXPzvAqhxd">pic.twitter.com/XXPzvAqhxd</a></p>&mdash; donatero (@DonateroKiree) <a href="https://twitter.com/DonateroKiree/status/831514176740732928">2017年2月14日</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+ 
+ <div></div>
+ <div>
+<a class="twitter-timeline"  href="https://twitter.com/hashtag/urlcode" data-widget-id="831450205853593600">#urlcode のツイート</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+</body>          

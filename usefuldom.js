@@ -27,4 +27,17 @@
     return Array.prototype.slice.call(arguments);
   }
   root.classOnce=root.classonce;
+  
+  root.vsrc=function(src,type="text/javascript"){
+     var blob = new Blob([src],{type: type});
+ return window.URL.createObjectURL(blob);
+}
+ root.textWorker =function(src){
+  var blob = new Blob([src],{type: "text/javascript"});
+ return new Worker(window.URL.createObjectURL(blob));
+}
+
+  
+  
+  
 })(this);

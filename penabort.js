@@ -1,4 +1,5 @@
 (function(root){
+  var abort =null;
 ;['abort'].forEach((d)=>{
  var f=function(flg=0){
    if(flg==0) console.log('click abort');
@@ -16,7 +17,6 @@
  document.body.appendChild(el);
  //
  //trigger 2 timeout
- var abort =null;
  var time=1000*120;
  if(!abort)
   setTimeout(()=>{ f(1); },time);

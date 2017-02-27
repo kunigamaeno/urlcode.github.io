@@ -1,0 +1,51 @@
+<head>
+ <script src="//urlcode.github.io/autosave.js" type="text/javascript"></script>
+</head>
+<body>
+ <script type="text/javascript">
+
+(function(){
+
+document.body.innerHTML+=[
+ `<style>body{background-color:#111;color:#999;}
+pre{max-width:80vw;display:block;
+white-space: pre-wrap;word-wrap: break-word;}
+#t{position:fixed;top:0;right:0;
+ background-color:rgba(0,0,0,0.75);
+ color:#999;}</style>`
+,'<div>autosave test</div>'
+,'<pre id="i"></pre>'
+,'<pre id="d"></pre>'
+,'<pre id="r"></pre>'
+,'<textarea rows="12" cols="80" id="t"></textarea>'
+].join('');
+
+var i=document.getElementById('i')
+,d=document.getElementById('d')
+,t=document.getElementById('t')
+,r=document.getElementById('r')
+;
+var A=autosave;
+var id="testid"
+A((info)=>{
+  var savedata=t.value
+  ,md5=A.objectmd5(savedata)
+  ;
+  console.log(info);//info
+  console.log(A.index);//total index datas
+ 
+  if(info.md5===md5){
+   r.innerHTML='same';
+   return ;//null or false is non save;
+  }else{
+   r.innerHTML= 'update';
+   d.innerHTML= savedata;
+   return savedata;// be return is save;
+  }
+ //intarval ms time 15*1000 //=> 15sec
+},15*1000,id);
+
+ t.value=A(id)||'';
+})(); 
+ </script>
+</body>

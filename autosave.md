@@ -54,6 +54,36 @@ A((info)=>{
 
 ```
 
+## code map
+```js
+//inner code
+fn.md5 = ...
+fn.en=function(obj){return JSON.stringify(obj).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029')};
+fn.de=function(obj){return JSON.parse(obj)};
+fn.isObjectEmpty=function(obj){return ( (Object.keys(obj).length)===0 )?true:false};
+fn.isString=function(obj){return (typeof obj == 'string') || false};
+ 
+fn._save=function(s,d){localStorage.setItem(s,d)};
+fn._load=function(s){return localStorage.getItem(s)};
+fn._remove=function(s){localStorage.removeItem(s)};
+
+//third mod join
+Object.assign(A,fn);
+
+A=function(){... } //entry point
+
+A.set =...
+A.autosave =...
+A.save =...
+A.remove =...
+A.load =...
+A.empty=function(old){return old}; 
+A.objectmd5=function(obj){return A.md5( A.en(obj) ) };
+A.timestamp=function(){return Date.now()};
+A.indexupdate=function(){ A.save(A.indexname,A.index)};
+A.indexload=function(){ A.index= A.load(A.indexname)||{} };
+```
+
 ## Note:
  - intervaltime minlimit is 15*1000
  - ```console.log(localStorage);console.log(info);console.log(A.index);``` is useful debug

@@ -129,3 +129,13 @@ fn.de=function(obj){return JSON.parse(obj)};
 
 md5 third party: blueimp thx.
 https://github.com/blueimp/JavaScript-MD5
+
+## feature
+localStorage depend 3 functions. so... other storage change.
+all data is changed JSON. this one text.
+rewrite 3 function only.
+```js
+fn._save=function(s,d){ fn_post(s,d)};
+fn._load=function(s){return fn_get(s)};
+fn._remove=function(s){ fn_delete(s)};
+```

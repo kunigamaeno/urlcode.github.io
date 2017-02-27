@@ -42,7 +42,7 @@ what? info:
 A((info)=>{
  console.log(info);
  //info.md5 //old md5data
- //info.name //saveid
+ //info.name //savename
  //info._name //localstrage item name: __autosave__.{savename} 
  //info.time //old data lastupdate time //format: Date.now() 
  //

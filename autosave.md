@@ -135,6 +135,7 @@ localStorage depend 3 functions. so... other storage change.
 all data is changed JSON. this one text.
 rewrite 3 function only.
 ```js
+var A=autosave;
 //if you write fn_post,fn_get,fn_delete...
 A._save=function(s,d){ fn_post(s,d)};
 A._load=function(s){return fn_get(s)};

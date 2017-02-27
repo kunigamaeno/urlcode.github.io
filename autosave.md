@@ -1,4 +1,6 @@
 # autosave.js
+## whats? this.
+ localStorage use. autosave.
 ## demo
 https://urlcode.github.io/autosave.test.html
 
@@ -6,7 +8,7 @@ https://urlcode.github.io/autosave.test.html
 https://urlcode.github.io/autosave.js
 
 ## Usage
-ready:
+basic:
 ```js
 var A=autosave;
 A((info)=>{ return {a:"aiuewo",ka:"kakikukeko"} },20*1000,'testname');//save
@@ -51,3 +53,38 @@ A((info)=>{
 },20*1000,'testname');
 
 ```
+
+## Note:
+ - intervaltime minlimit is 15*1000
+ - ```console.log(localStorage);console.log(info);console.log(A.index);``` is useful debug
+ 
+default values:
+```js
+//inner code
+ var v={
+  index:{}
+  ,prefix:'__autosave__.'
+  ,_name:'data'
+  ,_timer:15*1000
+  ,indexname :'__index__'
+  ,old:''
+ }
+ Object.assign(A,v);
+```
+origin access:
+localStorage.setItem(); localStorage.getItem();
+but... setItem use is data manage mismatch.
+```js
+//exsample
+localStorage.getItem('__autosave__.testname');
+localStorage.getItem('__autosave__.__index__');
+```
+savedata is JSON.stringify+:
+```js
+//inner code
+fn.en=function(obj){return JSON.stringify(obj).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029')};
+fn.de=function(obj){return JSON.parse(obj)};
+```
+
+md5 third party: blueimp thx.
+https://github.com/blueimp/JavaScript-MD5

@@ -71,7 +71,18 @@ fn._remove=function(s){localStorage.removeItem(s)};
 Object.assign(A,fn);
 
 A=function(){... } //entry point
-
+//values
+ var v={
+  index:{}
+  ,prefix:'__autosave__.'
+  ,_name:'data'
+  ,_timer:15*1000
+  ,indexname :'__index__'
+  ,old:''
+ }
+ Object.assign(A,v);
+ 
+//functions
 A.set =...
 A.autosave =...
 A.save =...

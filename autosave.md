@@ -9,15 +9,19 @@ https://urlcode.github.io/autosave.js
 ready:
 ```js
 var A=autosave;
+A((info)=>{ return {a:"aiuewo",ka:"kakikukeko"} },20*1000,'testname');//save
+A('testname'); //load
+A.index; //alldata info
 ```
-save: A(callback,intervaltime,saveid);
+save: A(callback,intervaltime,savename);
 ```js
 //simple
 A((info)=>{
  var savedata={a:"aiuewo",ka:"kakikukeko"};
  return savedata;
-},20*1000,'testid');
+},20*1000,'testname');
 ```
+same data check useful function: A.objectmd5(obj)
 ```js
 //md check use A.objectmd5(obj);
 A((info)=>{
@@ -30,7 +34,7 @@ A((info)=>{
   console.log('diff is save');
   return savedata;
  }
-},20*1000,'testid');
+},20*1000,'testname');
 
 ```
 what? info:
@@ -39,11 +43,11 @@ A((info)=>{
  console.log(info);
  //info.md5 //old md5data
  //info.name //saveid
- //info._name //localstrage item id 
+ //info._name //localstrage item name: __autosave__.{savename} 
  //info.time //old data lastupdate time //format: Date.now() 
  //
  var savedata={a:"aiuewo",ka:"kakikukeko"};
  return savedata;
-},20*1000,'testid');
+},20*1000,'testname');
 
 ```

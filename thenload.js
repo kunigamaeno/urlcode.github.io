@@ -26,6 +26,14 @@
   sol('textcss');
   });
  }
+ ,initer=function(html,f){
+  if(typeof html !=='string') return f(html);
+  //
+  var el=document.createElement('span');
+  el.innerHTML=html;
+  var me=el.childNodes[0];
+  return f(me);
+}
  ;
 
 var T=function(ary){
@@ -41,6 +49,8 @@ var T=function(ary){
    Promise.all(a).then((d)=>{ sol(d) })  
  })
 }
+
+T.initer=initer;
 
 root.thenload=T;
 })(this);

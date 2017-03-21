@@ -1,0 +1,158 @@
+.h-el {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.h-el::after {
+  content: '';
+  visibility: hidden;
+  clear: both;
+  display: table;
+}
+
+.h-gu {
+  background-color: #111;
+}
+
+.h-gu {
+  width: 100%;
+  height: 6px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  z-index: 10;
+}
+
+.h-gu.top {
+  top: 0;
+}
+
+.h-gu.bottom {
+  bottom: 0;
+}
+
+.h-gu {
+  opacity: 0;
+  transition: all 0.1s ease-in;
+}
+
+.h-gu:hover,
+.h-gu:focus {
+  opacity: 1;
+}
+
+.h-gu:active {
+  opacity: 1;
+}
+
+.h-r, .h-l {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+.h-r {
+  left: 50%;
+}
+
+.h-fit {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.h-el input[type=range] {
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+.h-el input[type=range]:focus {
+  outline: none;
+}
+.h-el input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0px;
+  border: 0px solid #000000;
+}
+.h-el input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #2497E3;
+  height: 6px;
+  width: 20px;
+  border-radius: 0px;
+  background: orange;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: 0px;
+}
+.h-el input[type=range]:focus::-webkit-slider-runnable-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+.h-el input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0px;
+  border: 0px solid #000000;
+}
+.h-el input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #2497E3;
+  height: 6px;
+  width: 20px;
+  border-radius: 0px;
+  background: orange;
+  cursor: pointer;
+}
+.h-el input[type=range]::-ms-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.h-el input[type=range]::-ms-fill-lower {
+  background: rgba(0, 0, 0, 0.1);
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+.h-el input[type=range]::-ms-fill-upper {
+  background: rgba(0, 0, 0, 0.1);
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+.h-el input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #2497E3;
+  height: 6px;
+  width: 20px;
+  border-radius: 0px;
+  background: orange;
+  cursor: pointer;
+}
+.h-el input[type=range]:focus::-ms-fill-lower {
+  background: rgba(0, 0, 0, 0.1);
+}
+.h-el input[type=range]:focus::-ms-fill-upper {
+  background: rgba(0, 0, 0, 0.1);
+}
+.h-el input[type=range] {
+  margin: 0;
+}

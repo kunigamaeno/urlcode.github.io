@@ -1,0 +1,32 @@
+<head></head>
+<body>
+<button id="b">b</button>
+<ul id="a"></ul>
+<a href="#123">123</a>
+
+ 
+ <script type="text/javascript">
+var b=document.getElementById('b');
+var a=document.getElementById('a');
+var count=0;
+var f2=function(ev){
+ var el=document.createElement('li');
+ el.textContent= count+':'+location.hash;
+ a.appendChild(el);
+ count++;
+}
+var f=function(ev){ 
+ var el=document.createElement('li');
+ el.textContent= [ev.newURL,ev.oldURL].map((d)=>{return d.replace(location.origin+location.pathname,'')}).join('\n');
+ a.appendChild(el);
+ //a.innerHTML=''console.log(location.href,ev.newURL,ev.oldURL) 
+}
+//window.addEventListener('onpopstate',f, false);
+//window.addEventListener('onhashchange',f, false);
+var r4=function(){ return (~~( (Math.random()+1)*0x10000)).toString(16).slice(1) } 
+
+window.onhashchange =f2;
+b.onclick=function(){location.hash= '#/abc/'+r4();}  
+ </script>
+  
+ </body>

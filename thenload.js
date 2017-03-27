@@ -1,5 +1,26 @@
 (function(root){
-
+ /*bridge*/
+var B={};
+B.fn={};
+B.f=function(d){return 'B.emit("%s",args...)'.replace('%s',d) }
+B.on=function(cmd,fn){ 
+ if(B.fn[cmd]) console.warn(cmd,':overwrited');
+ B.fn[cmd]=fn;
+}
+B.emit=function(){
+ if(arguments.length===0){console.warn(':cmd not');return}
+ var cmd=arguments[0],arg=[].slice.call(arguments,1)
+ ;
+ if(!B.fn[cmd]){console.warn(B.f(cmd),':cmd not');return}
+ return  B.fn[cmd].apply(this,arg);
+}
+B.list=function(opt){
+ if(!opt) Object.keys(B.fn).forEach((d)=>{console.log(B.f(d),''+B.fn[d] )})
+ else Object.keys(B.fn).forEach((d)=>{console.log(B.f(d))})
+}
+B.hint= B.list;
+ 
+ /**/
  var css=function(d,doc=document){
   return new Promise((sol)=>{
   var el=doc.createElement('link');
@@ -55,6 +76,7 @@ var T=function(ary,doc=document){
 };
 T.list={};
 T.initer=initer;
+T.bridge=B;
 
 root.thenload=T;
 })(this);

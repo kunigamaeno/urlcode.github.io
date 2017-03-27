@@ -1,55 +1,59 @@
 (function(root){
 
- var css=function(d){
+ var css=function(d,doc=document){
   return new Promise((sol)=>{
-  var el=document.createElement('link');
+  var el=doc.createElement('link');
   el.onload=function(ev){sol(ev)}
-  document.head.appendChild(el);
+  doc.head.appendChild(el);
   el.rel='stylesheet'
   el.media='all'
   el.href=d});
  }
- ,js=function(d){
+ ,js=function(d,doc=document){
   return new Promise((sol)=>{
-  var el=document.createElement('script');
+  var el=doc.createElement('script');
   el.onload=function(ev){sol(ev)}
   el.type='text/javascript';
-  document.body.appendChild(el);
+  doc.body.appendChild(el);
   el.src=d});
  }
- ,textcss=function(d){
+ ,textcss=function(d,doc=document){
   return new Promise((sol)=>{
-  var el=document.createElement('style');
-  document.head.appendChild(el);
+  var el=doc.createElement('style');
+  doc.head.appendChild(el);
   el.type="text/css";
   el.innerHTML=d;
   sol('textcss');
   });
  }
- ,initer=function(html,f){
+ ,initer=function(html,f,doc=document){
   if(typeof html !=='string') return f(html);
   //
-  var el=document.createElement('span');
+  var el=doc.createElement('span');
   el.innerHTML=html;
   var me=el.childNodes[0];
   return f(me);
 }
  ;
 
-var T=function(ary){
+var T=function(ary,doc=document){
+ var key=doc.baseURI.split('?')[0];
+ if(!T.list[key]) T.list[key]=[];
  var a=ary.map((d)=>{
+  if(T.list[key].includes(d)) return;  
+  T.list[key].push(d);//
   var istcss=/\r\n|\n|\r/.test(d)
   ,isjs=/(.+?)\.js$/.test(d.split('?')[0])
   ;
-  if(istcss) return textcss.bind(this,d)();
-  if(isjs) return js.bind(this,d)();
-  return css.bind(this,d)(); 
- });
+  if(istcss) return textcss.bind(this,d,doc )();  
+  if(isjs) return js.bind(this,d,doc )();
+  return css.bind(this,d,doc )(); 
+ }).filter(d=>d);
  return new Promise((sol)=>{
    Promise.all(a).then((d)=>{ sol(d) })  
  })
-}
-
+};
+T.list={};
 T.initer=initer;
 
 root.thenload=T;

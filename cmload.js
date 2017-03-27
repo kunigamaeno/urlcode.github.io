@@ -1,4 +1,6 @@
-T([
+B.on('cmload',function(el){
+   return new Promise(function(sol){
+    T([
  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/codemirror.min.css"
 ,"https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/theme/twilight.min.css"
 ,`.CodeMirror{ height:100%;}
@@ -6,8 +8,7 @@ T([
 .CodeMirror.cm-s-twilight {color: #aaa;}`
 ,"https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/codemirror.min.js" 
 ]).then((d)=>{
-/*cmload.js*/
-B.on('cmload',function(el){
+ 
     var myCodeMirror = CodeMirror(el, {
       value: '',
       mode:  "markdown",
@@ -15,12 +16,10 @@ B.on('cmload',function(el){
      lineWrapping: true,
      theme:"twilight"
     });
-  /*
-    var fdata=()=>{return myCodeMirror.getValue()} 
-     myCodeMirror.on('change',function(){ myCodeMirror.getValue() })
-     myCodeMirror.on('gutterClick',function(){console.log(arguments)}); 
-  */
-  return myCodeMirror;
- });
- 
+//    var fdata=()=>{return myCodeMirror.getValue()} 
+//     myCodeMirror.on('change',function(){ myCodeMirror.getValue() })
+//     myCodeMirror.on('gutterClick',function(){console.log(arguments)}); 
+      sol( myCodeMirror );
+    }); 
+  });
  });

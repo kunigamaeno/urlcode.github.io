@@ -105,6 +105,7 @@
      sol(data);
    });
   };
+  
   M.render=function(type,data){
     if(type==='body'){
     return data.main.map((se)=>{
@@ -121,13 +122,24 @@
      }).join('\n');
      
     }
-    /*
-    if(type==='basyo') return data;
-    if(type==='yougo') return data;
-    if(type==='midasi') return data;
-    */
-   }
-  
-  
+
+    if(type==='info'){ //else
+    return '<ul>' + data.other.map((d)=>{
+     var line= d.line+1;//line is not zero
+     line =('0000'+line).slice(-4);
+      return '<li>'
+       +'<dt data-type="'+d.type+'" data-line="'+line+'">' +d.d1+ '</dt>'
+       +'<dd data-type="'+d.type+'" data-id="'+d.d1+'"></dd>'
+       +'</li>';
+     }).join('\n') +'</ul>'
+     
+    }
+ 
+    //if(type==='basyo') return data;
+    //if(type==='yougo') return data;
+    //if(type==='midasi') return data;
+    
+   } 
+   
   root.markra=M;
  })(this);

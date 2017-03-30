@@ -60,13 +60,20 @@ fn._remove=function(s){localStorage.removeItem(s)};
     ,name:name
     ,time:A.timestamp()
     ,_name:A.prefix+name
+    ,timerid:''
    };
    A.indexupdate();//
   }  
   ////
    if(timer<A.timer) timer=A._timer; //safecode
-   setInterval(()=>{A.autosave(callback,name)},timer);
+   var timerid=setInterval(()=>{A.autosave(callback,name)},timer);
+   A.index[name].timerid=timerid;
   };
+ 
+ A.autostop=function(name){
+  clearInterval( A.index[name].timerid )
+ };
+ 
  A.autosave=function(fn,name){
   var info=A.index[name];
   var data=fn( info )

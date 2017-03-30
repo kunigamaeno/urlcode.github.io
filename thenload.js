@@ -48,14 +48,15 @@ B.hint= B.list;
   });
  }
  ,initer=function(html,f,doc=document){
-  if(typeof html !=='string') return f(html);
+  var _f =(f)?f:(el)=>{return el};
+  if(typeof html !=='string') return _f(html);
   //
   var el=doc.createElement('span');
   el.innerHTML=html;
   var me=el.childNodes[0];
-  return f(me);
+  return _f(me);
 }
- ;
+;
 
 var T=function(ary,doc=document){
  var key=doc.baseURI.split('?')[0];

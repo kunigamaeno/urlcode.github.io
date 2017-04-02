@@ -4,6 +4,7 @@ B.on('cmload',function(el){
  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/codemirror.min.css"
 ,"https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/theme/twilight.min.css"
 ,`.CodeMirror{ height:100%;}
+.CodeMirror-gutter { background-color: #151515;}
 .cm-s-twilight .CodeMirror-gutters {background: #222;border-right: 1px solid #333;}
 .CodeMirror.cm-s-twilight {color: #aaa;}`
 ,"https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/codemirror.min.js" 

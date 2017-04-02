@@ -103,6 +103,10 @@ fn._remove=function(s){localStorage.removeItem(s)};
   return A.de( A._load(A.prefix+str) )  
   //return A.de( localStorage.getItem(A.prefix+str) )
  };
+ A.list=function(re,o=localStorage){
+  return Object.keys(o).filter((d)=>{return (new RegExp(re) ).test(d)})
+ };
+ 
 
  //putty
  A.empty=function(old){return old}; 

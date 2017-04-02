@@ -99,8 +99,9 @@
        })
       return}
       //xyz:true;
-     });//forEach     
-     data.main.push(o);//lastdata comporse
+     });//forEach
+     if(o) //bug fix;
+      data.main.push(o);//lastdata comporse
      M.o=data;
      sol(data);
    });

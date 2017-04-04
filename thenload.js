@@ -57,7 +57,17 @@ B.hint= B.list;
   return _f(me);
 }
 ;
+var L=function(html,els){
+   var el= initer(html);
+   Object.keys(els).filter((d)=>{return (d!=='0')}).forEach((se)=>{
+    [].slice.call( el.querySelectorAll(se) )
+     .forEach((_el)=>{ els[se].call(_el) });
+   });
+   if(els['0']) els['0'].call(el); //top node call
+   return el;
+ }
 
+ 
 var T=function(ary,doc=document){
  var key=doc.baseURI.split('?')[0];
  if(!T.list[key]) T.list[key]=[];
@@ -78,6 +88,7 @@ var T=function(ary,doc=document){
 T.list={};
 T.initer=initer;
 T.bridge=B;
+T.loader=L;
 
 root.thenload=T;
 })(this);
